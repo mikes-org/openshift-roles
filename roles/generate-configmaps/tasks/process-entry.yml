@@ -1,9 +1,5 @@
 ---
 
-- name: Debug
-  debug:
-     msg: "ConfigMap content: {{ configmap }}"
-
 - name: "Set default values"
   set_fact:
     object_name: "{{ configmap.name }}"
@@ -35,4 +31,8 @@
 
 - name: "debug"
   debug: 
-    msg: "command_result: {{ command_result }}"
+    msg: "command_result: {{ command_result.stdout }}"
+
+- name: "Save CM to File"
+  local_command:
+    copy content="{{ command_result.stdout }}" dest="{{ destination }}"
