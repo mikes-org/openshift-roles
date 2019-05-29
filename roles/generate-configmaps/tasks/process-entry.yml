@@ -34,5 +34,5 @@
     msg: "command_result: {{ command_result.stdout }}"
 
 - name: "Save CM to File"
-  local_command:
+  local_action:
     copy content="{{ command_result.stdout }}" dest="{{ destination }}"
