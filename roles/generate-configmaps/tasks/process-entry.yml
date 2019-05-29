@@ -24,7 +24,7 @@
   command: >
     oc create {{object_name }} \
        {{ target_namespace }} \
-       --from-file {{ properties-file }} \
+       --from-file {{ properties_file }} \
        --dry-run=true \
   no_log: "{{ no_log }}"
   register: command_result
