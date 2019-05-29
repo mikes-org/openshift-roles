@@ -22,14 +22,20 @@
     oc create configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
-       --dry-run=true -o yaml | oc apply -f-
+       --dry-run=true -o yaml 
   no_log: "{{ no_log }}"
   register: command_result
   failed_when:
     - command_result.rc != 0
     - "'AlreadyExists' not in command_result.stderr"
 
+- name: "Verify destination"
+  file:
+     path: {{ destination }}
+     state: directory
+     recurse: yes
 
-#- name: "Save CM to File"
-#  local_action:
-#    copy content="{{ command_result.stdout }}" dest="{{ destination }}"
+- name: "Save CM to File"
+  local_action:
+    copy content="{{ command_result.stdout }}" dest="{{ destination }}/{{ object_name }}"
+
