@@ -26,7 +26,7 @@
     oc create configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
-       --dry-run=true --o yaml
+       --dry-run=true -o yaml
   no_log: "{{ no_log }}"
   register: command_result
   failed_when:
