@@ -1,0 +1,29 @@
+---
+
+- name: "Set default values"
+  set_fact:
+    object_name: "{{content.name }}"
+    target_namespace: ''
+    properties-file: "{{ content.properties-file | default('') }}"
+    params: "{{ content.params | default('') }}"
+    params_from_vars: "{{ content.params_from_vars | default({}) }}"
+    oc_ignore_unknown_parameters: "{{ content.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
+    no_log: False
+
+- name: "Set the target namespace option if supplied"
+  set_fact:
+    target_namespace: "-n {{ content.namespace }}"
+  when:
+    - content.namespace is defined
+
+- name: "{{ oc_action | capitalize }} OpenShift objects based on static files for '{{ entry.object }} : {{ configmaps.name | default(file | basename) }}'"
+  command: >
+    oc create {{object_name }} \
+       {{ target_namespace }} \
+       --from-file {{ properties-file }} \
+       --dry-run=true \
+  no_log: "{{ no_log }}"
+  register: command_result
+  failed_when:
+    - command_result.rc != 0
+    - "'AlreadyExists' not in command_result.stderr"

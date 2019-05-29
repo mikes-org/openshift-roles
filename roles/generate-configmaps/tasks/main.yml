@@ -1,0 +1,9 @@
+---
+- name: "Create Openshift Config Maps"
+  include_tasks: process-configmaps.yml
+  with_items:
+    - "{{ openshift_cluster_content | filter_applier_items(filter_tags) | default([]) }}"
+  loop_control:
+    loop_var: entry
+  when:
+    - entry.configmaps is defined
