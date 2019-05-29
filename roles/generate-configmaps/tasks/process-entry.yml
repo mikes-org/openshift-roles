@@ -34,4 +34,5 @@
     - "'AlreadyExists' not in command_result.stderr"
 
 - name: "debug"
-  debug: "command_result: {{ command_result }}"
+  debug: 
+    msg: "command_result: {{ command_result }}"
