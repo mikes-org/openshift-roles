@@ -9,6 +9,7 @@
     object_name: "{{ configmap.name }}"
     target_namespace: ''
     properties_file: "{{ configmap.properties_file | default('') }}"
+    destination: "{{ configmap.destination | default('') }}"
     params: "{{ configmap.params | default('') }}"
     params_from_vars: "{{ configmap.params_from_vars | default({}) }}"
     oc_ignore_unknown_parameters: "{{ configmap.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
@@ -25,7 +26,7 @@
     oc create configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
-       --dry-run=true \
+       --dry-run=true > {{ destination }}
   no_log: "{{ no_log }}"
   register: command_result
   failed_when:
