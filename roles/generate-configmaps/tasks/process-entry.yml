@@ -31,7 +31,7 @@
 
 - name: "Verify destination"
   file:
-     path: {{ destination }}
+     path: "{{ destination }}"
      state: directory
      recurse: yes
 
