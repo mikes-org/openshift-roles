@@ -19,20 +19,12 @@
 
 - name: "{{ oc_action | capitalize }} OpenShift objects based on static files for '{{ entry.object }} : {{ configmaps.name | default(file | basename) }}'"
   command: >
-    oc create configmap {{object_name }} \
+    oc apply configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
-       --dry-run=true -o yaml
   no_log: "{{ no_log }}"
   register: command_result
   failed_when:
     - command_result.rc != 0
     - "'AlreadyExists' not in command_result.stderr"
 
-- name: "debug"
-  debug: 
-    msg: "command_result: {{ command_result.stdout }}"
-
-- name: "Save CM to File"
-  local_action:
-    copy content="{{ command_result.stdout }}" dest="{{ destination }}"
