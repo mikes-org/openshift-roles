@@ -2,23 +2,23 @@
 
 - name: Debug
   debug:
-     msg: "ConfigMap content: {{ content }}"
+     msg: "ConfigMap content: {{ configmap }}"
 
 - name: "Set default values"
   set_fact:
-    object_name: "{{ content.name }}"
+    object_name: "{{ configmap.name }}"
     target_namespace: ''
-    properties-file: "{{ content.properties-file | default('') }}"
-    params: "{{ content.params | default('') }}"
-    params_from_vars: "{{ content.params_from_vars | default({}) }}"
-    oc_ignore_unknown_parameters: "{{ content.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
+    properties_file: "{{ configmap.properties_file | default('') }}"
+    params: "{{ configmap.params | default('') }}"
+    params_from_vars: "{{ configmap.params_from_vars | default({}) }}"
+    oc_ignore_unknown_parameters: "{{ configmap.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
     no_log: False
 
 - name: "Set the target namespace option if supplied"
   set_fact:
-    target_namespace: "-n {{ content.namespace }}"
+    target_namespace: "-n {{ configmap.namespace }}"
   when:
-    - content.namespace is defined
+    - configmap.namespace is defined
 
 - name: "{{ oc_action | capitalize }} OpenShift objects based on static files for '{{ entry.object }} : {{ configmaps.name | default(file | basename) }}'"
   command: >

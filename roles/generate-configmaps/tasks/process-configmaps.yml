@@ -5,5 +5,5 @@
   with_items:
     - "{{ configs.configmaps | default([]) }}"
   loop_control:
-    loop_var: content
+    loop_var: configmap
 
