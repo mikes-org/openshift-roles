@@ -26,8 +26,10 @@
     oc create configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
-       --dry-run=true > {{ destination }}
+       --dry-run=true
   no_log: "{{ no_log }}"
+  args:
+    creates: "{{ destination }}"
   register: command_result
   failed_when:
     - command_result.rc != 0
