@@ -22,7 +22,7 @@
 
 - name: "{{ oc_action | capitalize }} OpenShift objects based on static files for '{{ entry.object }} : {{ configmaps.name | default(file | basename) }}'"
   command: >
-    oc create {{object_name }} \
+    oc create configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
        --dry-run=true \
