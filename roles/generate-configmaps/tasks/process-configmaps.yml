@@ -3,7 +3,7 @@
 - name: "Create OpenShift ConfigMap ('{{ entry.object }}') - based on individual files"
   include_tasks: process-entry.yml
   with_items:
-    - "{{ entry.configmaps | default([]) }}"
+    - "{{ configs.configmaps | default([]) }}"
   loop_control:
     loop_var: content
 

@@ -4,6 +4,6 @@
   with_items:
     - "{{ openshift_cluster_content | filter_applier_items(filter_tags) | default([]) }}"
   loop_control:
-    loop_var: entry
+    loop_var: configs
   when:
     - entry.configmaps is defined

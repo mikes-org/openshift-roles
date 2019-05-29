@@ -1,8 +1,12 @@
 ---
 
+- name: Debug
+  debug:
+     msg: "ConfigMap content: {{ content }}"
+
 - name: "Set default values"
   set_fact:
-    object_name: "{{content.name }}"
+    object_name: "{{ content.name }}"
     target_namespace: ''
     properties-file: "{{ content.properties-file | default('') }}"
     params: "{{ content.params | default('') }}"
