@@ -26,11 +26,12 @@
     oc create configmap {{object_name }} \
        {{ target_namespace }} \
        --from-file {{ properties_file }} \
-       --dry-run=true
+       --dry-run=true --o yaml
   no_log: "{{ no_log }}"
-  args:
-    creates: "{{ destination }}"
   register: command_result
   failed_when:
     - command_result.rc != 0
     - "'AlreadyExists' not in command_result.stderr"
+
+- name: "debug"
+  debug: "command_result: {{ command_result }}"
