@@ -4,6 +4,7 @@
   set_fact:
     object_name: "{{ configmap.name }}"
     target_namespace: ''
+    config_options: '--from-file'
     properties_file: "{{ configmap.properties_file | default('') }}"
     destination: "{{ configmap.destination | default('') }}"
     params: "{{ configmap.params | default('') }}"
@@ -17,11 +18,17 @@
   when:
     - configmap.namespace is defined
 
+- name: "Set the config options"
+  set_fact:
+    config_options: "--from-env-file"
+  when:
+    - configmap.maptoenv is defined
+
 - name: "{{ oc_action | capitalize }} OpenShift objects based on static files for '{{ entry.object }} : {{ configmaps.name | default(file | basename) }}'"
   command: >
     oc create configmap {{object_name }} \
        {{ target_namespace }} \
-       --from-file {{ properties_file }} \
+       {{ config_options }} {{ properties_file }} \
        --dry-run=true -o yaml 
   no_log: "{{ no_log }}"
   register: command_result
