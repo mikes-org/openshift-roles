@@ -2,7 +2,7 @@
 
 - name: debug DYNATEMPLAES
   debug:
-     msg: "Processing templates ************************** {{ destination }}"
+     msg: "Processing templates ************************** {{ openshift_cluster_content }}"
 
 - name: "Set default values"
   set_fact:
