@@ -2,7 +2,7 @@
 
 - name: debug DYNATEMPLAES
   debug:
-     msg: "Processing templates ************************** {{ template }}"
+     msg: "Processing templates ************************** {{ destination }}"
 
 - name: "Set default values"
   set_fact:
@@ -15,6 +15,6 @@
 
 - name: Process the Jinja template
   template:
-    src: "{{ src_template }}"
-    dest: "{{ destintation }}"
+    src: "{{ src }}"
+    dest: "{{ destination }}"
 
