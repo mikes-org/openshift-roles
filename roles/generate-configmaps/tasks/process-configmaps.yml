@@ -1,9 +1,13 @@
 ---
 
+- name: "debug cm data"
+  debug:
+    msg: "**** CM DATA {{ configs }}"
+
 - name: "Create OpenShift ConfigMap ('{{ entry.object }}') - based on individual files"
   include_tasks: process-entry.yml
   with_items:
-    - "{{ configs.configmaps | default([]) }}"
+    - "{{ configs.configmaps_from_files | default([]) }}"
   loop_control:
     loop_var: configmap
 
