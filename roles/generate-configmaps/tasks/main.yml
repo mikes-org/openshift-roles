@@ -1,8 +1,5 @@
 ---
 
-- debug:
-  msg: "  ENRRY **** {{ entry }}"
-
 - name: "Create Openshift Config Maps"
   include_tasks: process-configmaps.yml
   with_items:
