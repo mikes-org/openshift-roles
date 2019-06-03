@@ -6,8 +6,6 @@
 
 - name: "Set default values"
   set_fact:
-    src_template: "{{ template.src | default('') }}" 
-    destination: "{{ template.destination | default('') }}"
     params: "{{ template.params | default('') }}"
     params_from_vars: "{{ template.params_from_vars | default({}) }}"
     oc_ignore_unknown_parameters: "{{ template.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
