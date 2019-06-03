@@ -5,6 +5,6 @@
   with_items:
     - "{{ configMaps | filter_applier_items(filter_tags) | default([]) }}"
   loop_control:
-    loop_var: configs
+    loop_var: configmap
   when:
     - configMaps is defined
