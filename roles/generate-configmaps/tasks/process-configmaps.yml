@@ -2,5 +2,5 @@
 - name: "Create OpenShift ConfigMap ('{{ entry.object }}') - based on individual files"
   include_tasks: process-entry.yml
   when:
-    - configmap is defined
+    - configmap is defined and conifgmap.name is defined
 
