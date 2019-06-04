@@ -4,13 +4,6 @@
   debug:
      msg: "Processing templates ************************** {{ openshift_cluster_content }}"
 
-- name: "Set default values"
-  set_fact:
-    params: "{{ template.params | default('') }}"
-    params_from_vars: "{{ template.params_from_vars | default({}) }}"
-    oc_ignore_unknown_parameters: "{{ template.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
-    no_log: False
-
 - name: Process the Jinja template
   template:
     src: "{{ src }}"
