@@ -7,8 +7,6 @@
     config_options: '--from-file'
     properties_file: "{{ configmap.properties_file | default('') }}"
     destination: "{{ configmap.destination | default('') }}"
-    params: "{{ configmap.params | default('') }}"
-    params_from_vars: "{{ configmap.params_from_vars | default({}) }}"
     oc_ignore_unknown_parameters: "{{ configmap.ignore_unknown_parameters | default(oc_ignore_unknown_parameters) }}"
     no_log: False
 

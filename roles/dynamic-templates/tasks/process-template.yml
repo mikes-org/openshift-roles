@@ -1,9 +1,5 @@
 ---
 
-- name: debug DYNATEMPLAES
-  debug:
-     msg: "Processing templates ************************** {{ openshift_cluster_content }}"
-
 - name: Process the Jinja template
   template:
     src: "{{ src }}"
